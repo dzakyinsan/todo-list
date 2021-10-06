@@ -1,0 +1,50 @@
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  margin: 10px 0 0 0;
+}
+.card-user {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  width: 100%;
+  transition: 600ms;
+}
+.card-user:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.user-name .name {
+  padding: 15px 0 0 35px;
+}
+.user-name span {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+.user-name p {
+  margin: 0;
+}
+.user-name .avatar-user {
+  color: white !important;
+  margin: 32px 0 0 20px !important;
+}
+ul {
+  list-style-type: none;
+}
+.description {
+  margin: -10px 0 0 -15px;
+}
+.description ul li p {
+  margin: 0;
+  font-size: 13px;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  height: 45px;
+  cursor: pointer;
+  transition: 500ms;
+}
+.actions:hover {
+  color: #00a5af;
+}
