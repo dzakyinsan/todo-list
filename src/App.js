@@ -5,6 +5,7 @@ import Header from "./components/header";
 import ListAlbums from "./pages/albums/list-albums";
 import ListPosts from "./pages/posts/list-post";
 import DetailPost from "./pages/posts/detail-post";
+import ListPhotos from "./pages/albums/list-photo-album";
 import "./App.css";
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route path={"/listAlbums/:id"} component={ListAlbums} />
           <Route path={"/listPosts/:id"} component={ListPosts} />
           <Route path={"/postDetail/:id"} component={DetailPost} />
-          {/* <Route path={"/listPhoto"} component={listPhoto} /> */}
+          <Route path={"/listPhoto/:id"} component={ListPhotos} />
         </Switch>
       </BrowserRouter>
     </div>

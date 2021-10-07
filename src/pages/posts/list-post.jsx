@@ -18,6 +18,11 @@ function ListPosts() {
   const [createData, setCreateData] = useState({});
   const { confirm } = Modal;
 
+  useEffect(() => {
+    getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const getPosts = async () => {
     const res = await Axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
     setPosts(res.data);
@@ -63,7 +68,7 @@ function ListPosts() {
     history.push(`/postDetail/${id}`);
   };
 
-  const showDeleteConfirm = (id, index) => {
+  const showDeleteConfirm = (id) => {
     confirm({
       title: "Are you sure delete this post?",
       icon: <ExclamationCircleOutlined />,
@@ -71,7 +76,7 @@ function ListPosts() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deletePost(id, index);
+        deletePost(id);
       },
     });
   };
@@ -121,25 +126,17 @@ function ListPosts() {
             </div>
             <div className="col-md-3 d-flex justify-content-evenly action-icon">
               <EditFilled className="edit " onClick={() => showEditModal(index)} />
-              <RestFilled className="delete" onClick={() => showDeleteConfirm(post.id, index)} />
+              <RestFilled className="delete" onClick={() => showDeleteConfirm(post.id)} />
             </div>
           </div>
         </Card>
       </div>
     ));
 
-  useEffect(() => {
-    getPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="container">
       <div className="main-container">
         <Breadcrumb separator=">">
-          <Breadcrumb.Item>
-            <a href="/">Dashboard</a>
-          </Breadcrumb.Item>
           <Breadcrumb.Item>
             <a href="/">Users</a>
           </Breadcrumb.Item>
@@ -162,7 +159,7 @@ function ListPosts() {
           <textarea name="body" className="form-control" value={dataEdit?.body} onChange={onChangeDate} />
         </div>
         <div className="d-flex justify-content-right">
-          <Button className="mr-2" onClick={() => setModalEdit(false)}>
+          <Button className="space-btn" onClick={() => setModalEdit(false)}>
             cancel
           </Button>
           <Button color="primary" onClick={onSubmitClick}>
@@ -183,7 +180,7 @@ function ListPosts() {
           <Button className="space-btn" onClick={() => setModalCreate(false)}>
             cancel
           </Button>
-          <Button color="primary" onClick={onSubmitClick}>
+          <Button color="primary" disabled={!createData.title || !createData.body} onClick={onSubmitClick}>
             Create
           </Button>
         </div>

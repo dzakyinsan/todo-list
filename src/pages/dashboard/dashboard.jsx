@@ -11,6 +11,10 @@ const Dashboard = () => {
 
   const ColorList = ["#f56a00", "#7265e6", "#ffbf00", "#00a2ae", "#69e781"];
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   const getUsers = async () => {
     const res = await Axios.get("https://jsonplaceholder.typicode.com/users");
     setUsers(res.data);
@@ -84,16 +88,11 @@ const Dashboard = () => {
     ));
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
   return (
     <div className="container">
       <div className="main-container">
         <Breadcrumb separator=">">
-          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-          <Breadcrumb.Item href="">Users</Breadcrumb.Item>
+          <Breadcrumb.Item>Users</Breadcrumb.Item>
         </Breadcrumb>
         <div className="row">{renderUsers()}</div>
       </div>
