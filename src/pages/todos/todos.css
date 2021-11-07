@@ -1,0 +1,59 @@
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  margin: 10px 0 0 0;
+}
+.action-icon {
+  align-items: center;
+  cursor: pointer;
+}
+
+.completed {
+  color: #48b367 !important;
+}
+.pending {
+  color: #f1b44c !important;
+}
+.delete:hover {
+  color: red;
+}
+.card-detail {
+  transition: 500ms;
+  border-left: 0px;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+.card-detail:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-left: 5px solid #00a5af;
+}
+.justify-content-right {
+  justify-content: right;
+}
+.create-post-btn {
+  background-color: #0397a1 !important;
+  color: white !important;
+  width: -webkit-fill-available;
+  border-radius: 5px !important;
+  height: 45px !important;
+}
+
+.space-btn {
+  margin-right: 15px !important;
+}
+.comment-detail .ant-comment-inner .ant-comment-content .ant-comment-content-detail p {
+  white-space: inherit !important;
+  font-size: 16px;
+}
+.space-between {
+  margin-right: 30px !important;
+}
+.each-todo span {
+  font-size: 15px;
+  color: gray;
+}
+.date-picker {
+  width: -webkit-fill-available;
+  border-radius: 5px !important;
+  height: 45px;
+}

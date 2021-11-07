@@ -1,100 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Avatar, Breadcrumb, Divider, Tooltip } from "antd";
-import Axios from "axios";
+import React from "react";
+import { Breadcrumb } from "antd";
+import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { FormOutlined, WindowsOutlined } from "@ant-design/icons";
-import "./../pages.css";
+import { Card } from "antd";
+import PostImage from "./../../assets/post.jpg";
+import TodoImage from "./../../assets/todo.jpg";
+
+import "./dashboard.css";
 
 const Dashboard = () => {
   const history = useHistory();
-  const [users, setUsers] = useState([]);
+  const { Meta } = Card;
 
-  const ColorList = ["#f56a00", "#7265e6", "#ffbf00", "#00a2ae", "#69e781"];
+  const loginOk = useSelector((state) => state.loginReducer.login);
+  const dataUser = useSelector((state) => state.loginReducer.dataUser);
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = async () => {
-    const res = await Axios.get("https://jsonplaceholder.typicode.com/users");
-    setUsers(res.data);
+  const goToListTodo = () => {
+    history.push(`/listTodo/${dataUser?.id}`);
   };
 
-  const goToAlbums = (id) => {
-    history.push(`/listAlbums/${id}`);
-  };
-  const goToPosts = (id) => {
-    history.push(`/listPosts/${id}`);
+  const goToListPost = () => {
+    history.push(`/listPost`);
   };
 
-  const renderUsers = () => {
-    return users?.map((user) => (
-      <div className="col-md-4 col-sm-6 mt-4" key={user.id}>
-        <div className="card-user">
-          <div className="d-flex user-name">
-            <Avatar className="avatar-user" style={{ fontSize: "15px", backgroundColor: ColorList[Math.floor(Math.random() * 4)] }}>
-              <p>{user.name.charAt(0)}</p>
-            </Avatar>
-            <div className="name">
-              <p> {user.username}</p>
-              <span>{`${user.company.name} company`}</span>
-            </div>
-          </div>
-          <Divider />
-          <div className="d-flex description">
-            <div>
-              <ul>
-                <li>
-                  <p>name</p>
-                </li>
-                <li>
-                  <p>email</p>
-                </li>
-                <li>
-                  <p>Phone</p>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>
-                  <p>{user.name}</p>
-                </li>
-                <li>
-                  <p>{user.email}</p>
-                </li>
-                <li>
-                  <p>{user.phone}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <Divider />
-
-          <div className="row">
-            <div className="col-6  actions">
-              <Tooltip title="Posts">
-                <FormOutlined onClick={() => goToPosts(user.id)} />
-              </Tooltip>
-            </div>
-            <div className="col-6  actions">
-              <Tooltip title="Albums">
-                <WindowsOutlined onClick={() => goToAlbums(user.id)} />
-              </Tooltip>
-            </div>
-          </div>
-        </div>
-      </div>
-    ));
-  };
-
+  if (!loginOk) return <Redirect to={`login`} />;
   return (
     <div className="container">
       <div className="main-container">
         <Breadcrumb separator=">">
-          <Breadcrumb.Item>Users</Breadcrumb.Item>
+          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
-        <div className="row">{renderUsers()}</div>
+        <div className="row dashboard-cont">
+          <div className="col-6 card-dashboard">
+            <Card cover={<img alt="example" src={PostImage} height="400px" />} onClick={goToListPost}>
+              <Meta title="List All Post" description="This is the the page that display all posts from the user" />
+            </Card>
+          </div>
+          <div className="col-6 card-dashboard">
+            <Card cover={<img alt="example" src={TodoImage} height="400px" />} onClick={goToListTodo}>
+              <Meta title="List my Todo" description="This is the page that display your todo list" />
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

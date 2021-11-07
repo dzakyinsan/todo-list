@@ -1,0 +1,8 @@
+.dashboard-cont {
+  height: 80vh;
+  display: grid;
+  place-items: center;
+}
+.card-dashboard {
+  cursor: pointer;
+}
