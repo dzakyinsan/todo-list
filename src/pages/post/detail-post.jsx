@@ -138,7 +138,7 @@ function DetailPosts() {
         </Breadcrumb>
         <div>
           <Card className="mt-4 mb-3">
-            <h1>{detail.title}</h1>
+            <h2>{detail.title}</h2>
             <p>{detail.body}</p>
           </Card>
           <Card>
