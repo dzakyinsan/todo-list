@@ -13,8 +13,8 @@ const Dashboard = () => {
   const history = useHistory();
   const { Meta } = Card;
 
-  const loginOk = useSelector((state) => state.loginReducer.login);
   const dataUser = useSelector((state) => state.loginReducer.dataUser);
+  const nameLs = localStorage.getItem("name");
 
   const goToListTodo = () => {
     history.push(`/listTodo/${dataUser?.id}`);
@@ -24,7 +24,7 @@ const Dashboard = () => {
     history.push(`/listPost`);
   };
 
-  if (!loginOk) return <Redirect to={`login`} />;
+  if (!nameLs) return <Redirect to={`login`} />;
   return (
     <div className="container">
       <div className="main-container">
